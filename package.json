@@ -1,0 +1,47 @@
+{
+  "name": "dsh-plugin-product-design",
+  "version": "0.1.0",
+  "description": "Product Design workflow suite for DeepSeek Harness: a router plus nine focused pd-* skills that carry early product ideas through a minimum design brief, three distinct visual directions, evidence-grounded UX research and flow audits, faithful URL cloning, responsive frontend builds, and a blocking design-QA gate before handoff. Ships an isolated skill provider, a prototype bootstrap script, Node user-context scripts, and a minimal Vite starter template.",
+  "type": "module",
+  "main": "index.mjs",
+  "files": [
+    "index.mjs",
+    "skills.mjs",
+    "skills/",
+    "references/",
+    "scripts/",
+    "templates/",
+    "cordis.patch.yml",
+    "install.ps1",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    ".gitignore"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "check": "node --check index.mjs && node --check skills.mjs && node --check scripts/bootstrap-prototype.mjs && node --check skills/user-context/scripts/user-context-preflight.mjs && node --check skills/user-context/scripts/user-context-init.mjs",
+    "test": "node --test test/smoke.test.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-skill-filesystem": ">=0.1.2-0 <0.2.0"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "product-design",
+    "prototyping",
+    "ux-audit",
+    "ux-research",
+    "design-qa",
+    "skill"
+  ],
+  "license": "MIT"
+}

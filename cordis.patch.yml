@@ -1,0 +1,11 @@
+# Product Design: skill-only plugin for DeepSeek Harness.
+# Mounted as an isolated plugin group so a fault cannot take down the host.
+- insert:
+    - id: product-design
+      name: '@deepseek-ai/cordis-plugin-group'
+      group: true
+      isolate:
+        productDesign: true
+      config:
+        - id: product-design-runtime
+          name: 'dsh-plugin-product-design'
