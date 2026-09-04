@@ -8,7 +8,7 @@
 
 ### Added
 
-- **品牌资产**：新增 `assets/banner-light.svg` / `assets/banner-dark.svg`（P·D 正负形 monogram：正形为 D 轮廓、负形透出 P；一级文本全大写、二级文本经 `textLength` 与一级等宽），README 顶部以 `<picture>` 按系统偏好自动切换亮暗。
+- **品牌资产**：新增 `assets/banner-light.svg` / `assets/banner-dark.svg`（P·D 正负形 monogram：正形为 D 轮廓、负形透出 P；透明画布、无背景底；一级文本全大写、二级文本经 `textLength` 与一级等宽），README 顶部以 `<picture>` 按系统偏好自动切换亮暗。
 
 ### Changed
 
