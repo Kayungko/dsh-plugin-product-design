@@ -7,7 +7,8 @@
  *   2. the installed files are complete (shell, skills, references, scripts,
  *      templates);
  *   3. the host's @deepseek-ai/dsh-skill-filesystem discovers exactly the ten
- *      pd-* skills from the installed skills directory and loads every body.
+ *      bundled skills (one entry + nine `pd-*`) from the installed skills
+ *      directory and loads every body.
  *
  * Usage:
  *   node verify-installed.mjs [--profile <dir>] [--app-node-modules <dir>]
@@ -133,7 +134,7 @@ if (!existsSync(providerEntry)) {
     const listed = await provider.list({ cwd: profile });
     const candidates = Array.isArray(listed) ? listed : listed?.candidates ?? [];
     const names = candidates.map((candidate) => candidate.name).sort();
-    check('provider discovers exactly the ten pd-* skills', JSON.stringify(names) === JSON.stringify([...EXPECTED_SKILLS].sort()), names.join(', '));
+    check('provider discovers exactly the ten bundled skills (1 entry + 9 pd-*)', JSON.stringify(names) === JSON.stringify([...EXPECTED_SKILLS].sort()), names.join(', '));
     check('every candidate is provider-tagged', candidates.every((candidate) => candidate.provider === 'product-design'));
 
     let loaded = 0;

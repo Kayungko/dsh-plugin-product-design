@@ -1,113 +1,179 @@
-# dsh-plugin-product-design
+<div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
-  <img alt="PRODUCT-DESIGN — BRIEF · EXPLORE · BUILD · QA" src="assets/banner.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.svg">
+  <img src="./assets/banner-light.svg" alt="product-design" width="600">
 </picture>
 
-DeepSeek Harness（DSH Desktop）上的 **Product Design 工作流套件**：把早期的产品想法，
-经过最小设计简报、三个差异化视觉方向、证据化的审计与研究、忠实的 URL 克隆、
-响应式前端构建，一路带到 **design-qa 硬闸门** 之后的交付。
+**Brief · Explore · Build · QA — a Product Design workflow plugin for DeepSeek Harness**
 
-对用户只有 **一个触发入口 `/product-design`**：入口技能分析需求后自动路由到
-9 个子工作流（`pd-*`，模型可见、用户命令列表隐藏）。不注册任何模型工具、
-客户端模块——纯技能、可热更新、随插件卸载消失。
+[![DSH 0.1.2-alpha.1 verified](https://img.shields.io/badge/DSH-0.1.2--alpha.1%20verified-16A34A?style=for-the-badge)](docs/PROTOCOL.md)
+[![Node.js](https://img.shields.io/badge/Node.js-%5E22.19%20%7C%20%3E%3D24-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](package.json)
+[![13 unit tests](https://img.shields.io/badge/tests-13%20unit-0EA5E9?style=for-the-badge)](test/smoke.test.mjs)
+[![MIT](https://img.shields.io/badge/license-MIT-7C3AED?style=for-the-badge)](LICENSE)
 
-> 本插件是对 Codex 官方 Product Design 插件**工作流方法论的原创重写**
-> （原文内容为 OpenAI Proprietary，未复制其文案与代码），与 OpenAI 无关联。
-> 详见下方「来源与许可」。
+[What is this](#what-is-this) · [Quick start](#quick-start) · [The ten skills](#the-ten-skills) · [Workflow gates](#the-workflow-gates-the-important-part) · [Architecture](docs/ARCHITECTURE.md) · [Host contract](docs/PROTOCOL.md) · [Changelog](CHANGELOG.md) · [中文](README.zh-CN.md)
 
-## 安装
+</div>
+
+---
+
+## What is this
+
+**One entry point — `/product-design` — and every design-flavored request is routed through a disciplined workflow:**
+
+```text
+/product-design I need an onboarding flow for a habit-tracking app
+```
+
+What happens behind the scenes: the entry skill analyzes the request and routes it to one of nine focused `pd-*` sub-skills — a minimum design brief, three distinct visual directions, evidence-grounded research and audits, faithful URL cloning, responsive frontend builds, and a blocking design-QA gate before anything may be called "done".
+
+- A **skill-only** DSH plugin: no model tools, no client modules — the entire surface is ten skills on an isolated provider;
+- Skills **hot-reload on edit**, never shadow project/user skills, and disappear together with the plugin on uninstall;
+- Evidence-driven by contract: screenshots are inspected before adoption, fake assets are forbidden;
+- One prerequisite: **DSH Desktop is installed and starts** (the plugin never launches the host for you).
+
+> 📌 Host contract verified on **DSH 0.1.2-alpha.1**; 13 unit tests plus an installed-location integration check pass (criteria in [Host contract](docs/PROTOCOL.md)).
+
+> 📌 This plugin is an **original rewrite** of the workflow methodology popularized by Codex's official Product Design plugin (whose source is OpenAI Proprietary; no text or code copied). No affiliation with OpenAI — see [License & provenance](#license--provenance).
+
+## Quick start
+
+### Prerequisites
+
+- DSH Desktop (contract verified on 0.1.2-alpha.1);
+- Node.js `^22.19.0 || >=24` (the host runtime usually satisfies this already);
+- PowerShell (the deploy script is `.ps1`).
+
+### Install (one command)
 
 ```powershell
-pwsh install.ps1            # 复制进 ~/.dsh/profiles/desktop 并登记 manifest（自动备份）
-pwsh install.ps1 -Uninstall # 移除
+git clone https://github.com/Kayungko/dsh-plugin-product-design.git
+cd dsh-plugin-product-design
+pwsh install.ps1
 ```
 
-安装后 **重启 DSH Desktop**。用户侧只有 `/product-design` 一个入口命令
-（子技能标记 `user-invocable: false`，不占用命令列表）；也可以直接用自然语言
-触发（如"审计这个注册流程"），模型会自动加载对应技能。
+The script copies the plugin into the profile's `node_modules/` (no `pnpm install`, the lockfile stays untouched) and registers the dependency + bundle in the profile manifest — **everything is backed up first** into `backups/<timestamp>/`.
 
-开发自检：
+**Restart DSH Desktop** afterwards — the ten skills are then visible in every session.
+
+> 💡 Re-running is safe: file copies are idempotent and manifest registration de-duplicates.
+
+### Verify
+
+After the restart, send this to any session:
+
+`/product-design sketch a settings page for a desktop pet app`
+
+The router acknowledges, runs the brief gate (asks the minimum design questions) and — once a visual target exists — proposes three directions instead of jumping to code ✅
+
+Uninstall: `pwsh install.ps1 -Uninstall` (also takes effect after restart).
+
+## The ten skills
+
+| Skill | Role |
+|---|---|
+| `product-design` | The single user entry (`/product-design`): analyzes and routes; routes only, never executes; "No Visual Target, No Build" |
+| `pd-get-context` | Minimum design-brief gate |
+| `pd-user-context` | Persistent product/design context (`~/.dsh/product-design/`) |
+| `pd-research` | Evidence-grounded UX desktop research |
+| `pd-ideate` | Three distinct visual directions (images when a generation tool is available, structured text otherwise) |
+| `pd-image-to-code` | Chosen visual target → faithful interactive frontend |
+| `pd-url-to-code` | Live URL → local frontend clone (evidence first) |
+| `pd-audit` | Product-flow audit (user-facing, screenshot evidence) |
+| `pd-design-qa` | Internal QA gate (`passed` / `blocked`) |
+| `pd-share` | Deploy/share (only after the user picks a target) |
+
+The nine `pd-*` sub-skills are model-visible but hidden from the user command list (`user-invocable: false`) — the model routes to them automatically.
+
+## The workflow gates (the important part)
+
+```text
+explicit invoke / design-flavored request
+  → pd-user-context preflight
+  → pd-get-context (minimum brief: design goal + expected user outcome)
+    ├─ no visual target: pd-ideate → 3 directions → user picks 1 → pd-image-to-code
+    ├─ clone a live page: pd-url-to-code (evidence first, build only on evidence)
+    ├─ redesign ("Like <URL>"): screenshot evidence → pd-ideate
+    ├─ audit / critique: pd-audit (screenshot evidence inlined in the report)
+    └─ user-pain research: pd-research
+  before handoff: pd-design-qa hard gate (design-qa.md: only `passed` may ship)
+  share: pd-share (only after the user selects a target)
+```
+
+- **No Visual Target, No Build** — no code without a visual target; "go for it / just assume" does not waive the three-direction flow;
+- **design-qa hard gate** — if `design-qa.md` is missing or `final result` is not `passed`, the work may not be delivered as "done";
+- **No fake assets** — div art / CSS art / hand-written SVG / emoji may never stand in for real icons or images;
+- **Evidence rule** — audits use only evidence collected in the same turn; screenshots are inspected before adoption.
+
+## Communication protocol
+
+Every final reply: result first, non-technical language, and **exactly one next step** at the end. Full rules in [references/communication-protocol.md](references/communication-protocol.md).
+
+## Capability boundaries (DSH adaptation)
+
+| Capability | Status |
+|---|---|
+| Browser evidence | Playwright by default (via shell; first use prompts to install), or a user-supplied browser MCP; if neither is available, report honestly — never fabricate evidence |
+| Image generation | Uses the session's image tool when present; otherwise `pd-ideate` emits structured text directions and states the degradation |
+| Preview | Starts `npm run dev` locally and hands `http://127.0.0.1:<port>` to the user (the DSH Web GUI renders no preview) |
+| Hosted sharing | Deploys only after the user selects a target (an authenticated static-hosting CLI on this machine, etc.) |
+
+## Configuration (cordis.yml / patch)
+
+```yaml
+- id: product-design-runtime
+  name: 'dsh-plugin-product-design'
+  config:
+    enabled: true
+```
+
+`enabled: false` skips the skill mount while the bundle still provides its `productDesign` descriptor. See [Architecture](docs/ARCHITECTURE.md).
+
+Skill state directory: `~/.dsh/product-design/user-context.md` + `assets/` (`$DSH_HOME/product-design/`, overridable with `--state-dir`).
+
+---
+
+## For developers
+
+Module layering, mount topology and the degradation strategy live in **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**. Quick reference only here.
+
+### Development & tests
 
 ```powershell
-npm run check   # node --check 全部脚本
-npm test        # node --test 单元测试（mock 宿主）
-node verify-installed.mjs   # 安装态集成验证（真实宿主 provider 发现 10 个技能）
+npm run check                        # node --check every script
+npm test                             # 13 unit tests (mocked host)
+# after installing into a profile (see Quick start):
+node verify-installed.mjs            # installed-location integration check: real host provider discovers 10 skills
 ```
 
-## 工作流
+### Directory
 
-```
-显式唤起 / 设计类请求
-  → pd-user-context preflight（~/.dsh/product-design/user-context.md）
-  → pd-get-context（最小简报：设计目标 + 期望的用户结果，回放后同轮继续）
-    ├─ 无视觉目标：pd-ideate 出 3 个方向 → 用户选 1 → pd-image-to-code
-    ├─ 克隆线上页：pd-url-to-code（先取证、只按证据构建）
-    ├─ 重设计（"Like <URL>"）：截图取证 → pd-ideate
-    ├─ 审计 / 批评：pd-audit（截图证据内联报告）
-    └─ 用户痛点研究：pd-research
-  构建完成前：pd-design-qa 硬闸门（design-qa.md：final result: passed 才可交付）
-  分享：pd-share（用户选定目标后才部署）
-```
-
-| Skill | 角色 |
-|---|---|
-| `product-design` | 唯一用户入口（`/product-design`）：分析需求并路由；只路由不干活；"No Visual Target, No Build" |
-| `pd-get-context` | 最小设计简报闸门 |
-| `pd-user-context` | 持久化产品/设计上下文（`~/.dsh/product-design/`） |
-| `pd-research` | 证据化 UX 桌面研究 |
-| `pd-ideate` | 三个差异化视觉方向（有图像生成工具出图，否则结构化文字方向） |
-| `pd-image-to-code` | 选定视觉目标 → 忠实交互前端 |
-| `pd-url-to-code` | 线上 URL → 本地前端克隆（证据先行） |
-| `pd-audit` | 产品流审计（用户面向，截图证据） |
-| `pd-design-qa` | 内部 QA 闸门（`passed`/`blocked`） |
-| `pd-share` | 部署分享（用户选定目标后执行） |
-
-## 关键契约
-
-- **No Visual Target, No Build**：没有视觉目标不写代码；"go for it / 做个假设"不豁免三方向流程。
-- **design-qa 硬闸门**：`design-qa.md` 不存在或 `final result` 不是 `passed`，不得按"完成"交付。
-- **禁假资产**：禁止 div art / CSS art / 手写 SVG / emoji 顶替真实图标与图片。
-- **证据规则**：审计只用当轮采集的证据；截图先检视后采纳。
-- **沟通协议**：结果先行、非技术语言、每次最终回复以恰好一个下一步收尾。
-
-## 能力边界（DSH 适配）
-
-| 能力 | 现状 |
-|---|---|
-| 浏览器取证 | 默认 Playwright（经 shell，首次使用会提示安装），或用户自备浏览器 MCP；都不可用时如实报告，不伪造证据 |
-| 图像生成 | 会话接入了图像生成工具则出图；否则 `pd-ideate` 产出结构化文字方向并明示降级 |
-| 预览 | 本地起 `npm run dev`，把 `http://127.0.0.1:<port>` 交给用户在浏览器打开（DSH Web GUI 不渲染预览） |
-| 托管分享 | 用户选定目标（本机已认证的静态托管 CLI 等）后才部署 |
-
-## 结构
-
-```
-plugin-product-design/
-├─ package.json              # dsh.bundle.patch → cordis.patch.yml
-├─ cordis.patch.yml          # 隔离 cordis-plugin-group
-├─ index.mjs                 # apply(ctx)：挂载隔离 skill provider
-├─ skills.mjs                # providerName 'product-design'，仅服务本包 skills/
-├─ skills/                   # 10 个 pd-* 技能（各含 SKILL.md，部分含 references/scripts）
-├─ references/               # 4 个插件级共享规则
-├─ scripts/bootstrap-prototype.mjs   # 从模板创建新原型
-├─ templates/prototype/      # 原创极简 Vite + React starter
-├─ install.ps1               # 复制式部署（备份 + manifest 登记）
-├─ test/smoke.test.mjs       # 单元测试（node --test）
-└─ verify-installed.mjs      # 安装态集成验证
+```text
+dsh-plugin-product-design/
+├── index.mjs               cordis entry · wiring (fire-and-forget skill mount)
+├── skills.mjs              isolated skill provider (dynamic import, degrades to warning)
+├── skills/                 10 skills: 1 entry + 9 pd-* (SKILL.md each; some with references/scripts)
+├── references/             4 plugin-wide shared rules
+├── scripts/bootstrap-prototype.mjs  create a new prototype from the template
+├── templates/prototype/    original minimal Vite + React starter
+├── cordis.patch.yml        isolated plugin-group mount descriptor
+├── install.ps1             deploy script (copy-based install + automatic backups)
+├── verify-installed.mjs    installed-location integration check
+├── test/smoke.test.mjs     13 unit tests
+├── assets/                 brand banners (light/dark)
+└── docs/                   ARCHITECTURE.md · PROTOCOL.md
 ```
 
-技能状态目录：`~/.dsh/product-design/user-context.md` + `assets/`
-（`$DSH_HOME/product-design/`，可用 `--state-dir` 覆盖）。
+## Documentation
 
-## 来源与许可
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — architecture: why skill-only, mount topology, degradation strategy
+- **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — workflow gates & host contract, field-tested (injection surface, skill-mount contract, capability boundaries, verification records)
+- **[CHANGELOG.md](CHANGELOG.md)** — release history
+- **[references/](references/)** — the four shared rule files the skills actually load
 
-工作流方法论（简报闸门 → 三方向 → 构建 → QA 闸门、证据化审计等）受 Codex 官方
-Product Design 插件启发；本仓库全部文案、脚本与模板为**原创重写**，未复制
-OpenAI 的专有内容（其源未公开、许可为 Proprietary）。本插件与 OpenAI 无关联。
+## License & provenance
 
-插件壳的挂载模式与 `dsh-plugin-task-coordinator` 同源
-（隔离 `@deepseek-ai/dsh-skill-filesystem` provider）。
+This plugin is [MIT](LICENSE). The workflow methodology (brief gate → three directions → build → QA gate, evidence-grounded audits) is inspired by Codex's official Product Design plugin; all text, scripts and templates in this repository are an **original rewrite** — no OpenAI proprietary content copied (their source is unpublished, licensed Proprietary). No affiliation with OpenAI.
 
-License: [MIT](LICENSE)
+The `@deepseek-ai/*` host packages it runs against belong to and are licensed by DeepSeek Harness; they are not covered by this repository's license.

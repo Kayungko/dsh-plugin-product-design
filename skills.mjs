@@ -1,7 +1,8 @@
 /**
  * Skill mounting for dsh-plugin-product-design.
  *
- * Ships the ten `pd-*` Product Design skills inside the bundle by mounting an
+ * Ships the ten Product Design skills (one `product-design` entry plus nine
+ * `pd-*` sub-skills) inside the bundle by mounting an
  * ISOLATED @deepseek-ai/dsh-skill-filesystem provider that serves only this
  * plugin's own `skills/` directory (same pattern as the shipped
  * @openviking/dsh-memory-plugin and dsh-plugin-task-coordinator).
@@ -16,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 /** Provider name on `ctx.skills`; must not collide with DSH's own `filesystem`. */
 export const SKILL_PROVIDER_NAME = 'product-design';
 
-/** The bundled skills directory (ten pd-* skill bundles). */
+/** The bundled skills directory (ten skill bundles: one entry + nine `pd-*`). */
 export const SKILLS_DIR = fileURLToPath(new URL('./skills', import.meta.url));
 
 export function buildSkillsConfig() {

@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-product-design",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Product Design workflow suite for DeepSeek Harness: a router plus nine focused pd-* skills that carry early product ideas through a minimum design brief, three distinct visual directions, evidence-grounded UX research and flow audits, faithful URL cloning, responsive frontend builds, and a blocking design-QA gate before handoff. Ships an isolated skill provider, a prototype bootstrap script, Node user-context scripts, and a minimal Vite starter template.",
   "type": "module",
   "main": "index.mjs",
@@ -13,8 +13,13 @@
     "templates/",
     "cordis.patch.yml",
     "install.ps1",
+    "verify-installed.mjs",
+    "test/",
+    "assets/",
+    "docs/",
     "CHANGELOG.md",
     "README.md",
+    "README.zh-CN.md",
     "LICENSE",
     ".gitignore"
   ],
