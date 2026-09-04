@@ -1,5 +1,10 @@
 # dsh-plugin-product-design
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
+  <img alt="PRODUCT-DESIGN — BRIEF · EXPLORE · BUILD · QA" src="assets/banner.svg">
+</picture>
+
 DeepSeek Harness（DSH Desktop）上的 **Product Design 工作流套件**：把早期的产品想法，
 经过最小设计简报、三个差异化视觉方向、证据化的审计与研究、忠实的 URL 克隆、
 响应式前端构建，一路带到 **design-qa 硬闸门** 之后的交付。

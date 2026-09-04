@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="PRODUCT-DESIGN — Brief, Explore, Build, QA">
+  <title>product-design</title>
+  <rect width="1280" height="320" fill="#0B0D10"/>
+  <!-- monogram: positive D silhouette, negative P counter (blue underlay shows through) -->
+  <g transform="translate(270,94) scale(1.1)">
+    <rect x="30" y="28" width="62" height="68" fill="#4C7FE8"/>
+    <path fill-rule="evenodd" fill="#F2F4F7" d="M20,0 H62 C98,0 120,27 120,60 C120,93 98,120 62,120 H20 C9,120 0,111 0,100 V20 C0,9 9,0 20,0 Z M30,28 H64 C82,28 92,39 92,53 C92,67 82,78 64,78 H44 V96 H30 Z"/>
+  </g>
+  <!-- primary: uppercase wordmark; secondary justified to the same width via textLength -->
+  <text x="450" y="154" textLength="560" lengthAdjust="spacing" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="60" font-weight="600" fill="#F2F4F7">PRODUCT-DESIGN</text>
+  <text x="450" y="208" textLength="560" lengthAdjust="spacing" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="500" fill="#8A93A3">BRIEF · EXPLORE · BUILD · QA</text>
+</svg>
