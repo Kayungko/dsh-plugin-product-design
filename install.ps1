@@ -68,11 +68,16 @@ foreach ($file in $files) {
   $from = Join-Path $Source $file
   if (Test-Path $from) { Copy-Item $from (Join-Path $Target $file) -Force }
 }
-# bundled content directories (recursive)
+# bundled content directories (recursive). Remove-then-copy keeps re-runs
+# idempotent: Copy-Item into an EXISTING directory would nest the source
+# inside it (skills\skills) and leave stale files behind.
 $dirs = @('skills', 'references', 'scripts', 'templates')
 foreach ($dir in $dirs) {
   $from = Join-Path $Source $dir
-  if (Test-Path $from) { Copy-Item $from (Join-Path $Target $dir) -Recurse -Force }
+  $to = Join-Path $Target $dir
+  if (-not (Test-Path $from)) { continue }
+  if (Test-Path $to) { Remove-Item $to -Recurse -Force }
+  Copy-Item $from $to -Recurse -Force
 }
 Write-Host "copied plugin -> $Target"
 
