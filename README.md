@@ -91,12 +91,13 @@ The nine `pd-*` sub-skills are model-visible but hidden from the user command li
 ```text
 explicit invoke / design-flavored request
   → pd-user-context preflight
-  → pd-get-context (minimum brief: design goal + expected user outcome)
-    ├─ no visual target: pd-ideate → 3 directions → user picks 1 → pd-image-to-code
-    ├─ clone a live page: pd-url-to-code (evidence first, build only on evidence)
-    ├─ redesign ("Like <URL>"): screenshot evidence → pd-ideate
-    ├─ audit / critique: pd-audit (screenshot evidence inlined in the report)
-    └─ user-pain research: pd-research
+  ├─ audit / critique: pd-audit directly (no brief gate; screenshot evidence inlined in the report)
+  └─ design / build / clone / redesign / research:
+      → pd-get-context (minimum brief: design goal + expected user outcome)
+        ├─ no visual target: pd-ideate → 3 directions → user picks 1 → pd-image-to-code
+        ├─ clone a live page: pd-url-to-code (evidence first, build only on evidence)
+        ├─ redesign ("Like <URL>"): screenshot evidence → pd-ideate
+        └─ user-pain research: pd-research
   before handoff: pd-design-qa hard gate (design-qa.md: only `passed` may ship)
   share: pd-share (only after the user selects a target)
 ```
@@ -162,13 +163,15 @@ dsh-plugin-product-design/
 ├── verify-installed.mjs    installed-location integration check
 ├── test/smoke.test.mjs     13 unit tests
 ├── assets/                 brand banners (light/dark)
-└── docs/                   ARCHITECTURE.md · PROTOCOL.md
+└── docs/                   ARCHITECTURE.md · PROTOCOL.md · SKILLS.md · INSTALLATION.md
 ```
 
 ## Documentation
 
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — architecture: why skill-only, mount topology, degradation strategy
 - **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — workflow gates & host contract, field-tested (injection surface, skill-mount contract, capability boundaries, verification records)
+- **[docs/SKILLS.md](docs/SKILLS.md)** — skill reference: catalog, routing rules, typical chains, per-skill contracts, shared rule index
+- **[docs/INSTALLATION.md](docs/INSTALLATION.md)** — installation guide: installer behavior, verification criteria, uninstall semantics, installed layout, troubleshooting
 - **[CHANGELOG.md](CHANGELOG.md)** — release history
 - **[references/](references/)** — the four shared rule files the skills actually load
 

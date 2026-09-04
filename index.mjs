@@ -22,7 +22,7 @@ import { mountProductDesignSkills } from './skills.mjs';
 export const name = 'product-design';
 export const inject = [];
 
-export const VERSION = '0.1.2';
+export const VERSION = '0.1.3';
 
 /**
  * @param {object} ctx cordis context

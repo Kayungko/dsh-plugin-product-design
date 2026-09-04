@@ -91,12 +91,13 @@ pwsh install.ps1
 ```text
 显式唤起 / 设计类请求
   → pd-user-context preflight
-  → pd-get-context（最小简报：设计目标 + 期望的用户结果）
-    ├─ 无视觉目标：pd-ideate 出 3 个方向 → 用户选 1 → pd-image-to-code
-    ├─ 克隆线上页：pd-url-to-code（先取证、只按证据构建）
-    ├─ 重设计（"Like <URL>"）：截图取证 → pd-ideate
-    ├─ 审计 / 批评：pd-audit（截图证据内联报告）
-    └─ 用户痛点研究：pd-research
+  ├─ 审计 / 批评：pd-audit 直达（不过简报闸门；截图证据内联报告）
+  └─ 设计 / 构建 / 克隆 / 重设计 / 研究：
+      → pd-get-context（最小简报：设计目标 + 期望的用户结果）
+        ├─ 无视觉目标：pd-ideate 出 3 个方向 → 用户选 1 → pd-image-to-code
+        ├─ 克隆线上页：pd-url-to-code（先取证、只按证据构建）
+        ├─ 重设计（"Like <URL>"）：截图取证 → pd-ideate
+        └─ 用户痛点研究：pd-research
   交付前：pd-design-qa 硬闸门（design-qa.md：final result 为 passed 才可交付）
   分享：pd-share（用户选定目标后才部署）
 ```
@@ -162,13 +163,15 @@ dsh-plugin-product-design/
 ├── verify-installed.mjs    安装态集成验证
 ├── test/smoke.test.mjs     13 个单元测试
 ├── assets/                 品牌 banner（亮/暗）
-└── docs/                   ARCHITECTURE.md · PROTOCOL.md
+└── docs/                   ARCHITECTURE.md · PROTOCOL.md · SKILLS.md · INSTALLATION.md
 ```
 
 ## 文档
 
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — 架构设计：为什么是纯技能插件、挂载拓扑、降级策略
 - **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — 工作流闸门与主机契约实测参考（注入面、技能挂载契约、能力边界、验证记录）
+- **[docs/SKILLS.md](docs/SKILLS.md)** — 技能参考：目录、路由规则、典型链条、逐技能契约、共享规则索引
+- **[docs/INSTALLATION.md](docs/INSTALLATION.md)** — 安装指南：安装器行为、验证判据、卸载语义、安装后布局、排错
 - **[CHANGELOG.md](CHANGELOG.md)** — 版本更新日志
 - **[references/](references/)** — 技能实际加载的 4 个共享规则文件
 

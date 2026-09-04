@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-09-04
+
+### Added
+
+- **技能参考与安装指南**：新增 `docs/SKILLS.md`（技能目录、路由规则、典型链条、逐技能契约、共享规则索引）与 `docs/INSTALLATION.md`（安装器五步行为、验证三判据、卸载语义、安装后布局、排错表），自技能正文与安装器实现提炼。
+
+### Fixed
+
+- **路由图准确性**：审计/批评按 `skills/index/SKILL.md` 直达 `pd-audit`、不过简报闸门（与构建并存时先审计再继续正常流程）；修正双语 README 的闸门图与 `PROTOCOL.md` 路由判据表述。
+
 ## [0.1.2] - 2026-09-04
 
 ### Added
@@ -34,7 +44,8 @@
 - **部署与验证**：`install.ps1` 复制式部署（自动备份、幂等）+ `verify-installed.mjs` 安装态集成验证。
 - 内容为原创重写（工作流方法论受 Codex Product Design 插件启发，未复制其专有内容）。
 
-[Unreleased]: https://github.com/Kayungko/dsh-plugin-product-design/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/Kayungko/dsh-plugin-product-design/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Kayungko/dsh-plugin-product-design/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Kayungko/dsh-plugin-product-design/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Kayungko/dsh-plugin-product-design/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Kayungko/dsh-plugin-product-design/releases/tag/v0.1.0

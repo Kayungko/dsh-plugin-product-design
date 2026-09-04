@@ -35,7 +35,7 @@
 | 禁假资产 | div art / CSS art / 手写 SVG / emoji 不得顶替真实图标与图片 | 全部构建类技能 |
 | 证据规则 | 审计只用当轮采集的证据；截图**先检视后采纳** | `pd-audit` / `pd-research` / `pd-url-to-code` |
 
-路由判据（入口技能）：显式唤起或设计类请求先过 `pd-user-context` preflight，再过简报闸门；按目标形态分流——无视觉目标走三方向、克隆线上页走 `pd-url-to-code`（证据先行）、"Like \<URL\>" 重设计先截图取证、审计/批评走 `pd-audit`、痛点研究走 `pd-research`；交付前一律过 design-qa；`pd-share` 只在用户选定目标后执行。
+路由判据（入口技能）：显式唤起或设计类请求先过 `pd-user-context` preflight；审计/批评**直达 `pd-audit`，不过简报闸门**（与构建并存时先审计再继续正常流程）；其余设计类请求过简报闸门后按目标形态分流——无视觉目标走三方向、克隆线上页走 `pd-url-to-code`（证据先行）、"Like \<URL\>" 重设计先截图取证、痛点研究走 `pd-research`；交付前一律过 design-qa；`pd-share` 只在用户选定目标后执行。
 
 ## 4. 沟通协议
 
