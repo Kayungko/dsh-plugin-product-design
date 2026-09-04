@@ -1,5 +1,6 @@
 ---
 name: pd-url-to-code
+user-invocable: false
 description: "Clone a live URL as a runnable frontend-only local app. Use when the user asks to clone or recreate a page they own or have permission to recreate; capture evidence first, build only from evidence."
 ---
 
@@ -9,13 +10,13 @@ If the user explicitly invokes this skill, continue.
 
 Only continue when the user asks to clone or recreate the current site.
 
-If the user says `like`, `better`, `redesign`, or `improve`, return to [$pd-index](../index/SKILL.md).
+If the user says `like`, `better`, `redesign`, or `improve`, return to [$product-design](../index/SKILL.md).
 
 Clone `<target-url>` as a real interactive, frontend-only local app or website. The clone should look and interact like the source.
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 
 ## User Context

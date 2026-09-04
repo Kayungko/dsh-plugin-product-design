@@ -1,5 +1,6 @@
 ---
 name: pd-image-to-code
+user-invocable: false
 description: "Implement a selected image, screenshot, mockup, or named ideation direction as a faithful, responsive frontend. Use after the user has chosen a visual target; not for briefless builds."
 ---
 
@@ -9,7 +10,7 @@ You're tasked with translating the selected visual target into a high-quality, i
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 
 ## User Context

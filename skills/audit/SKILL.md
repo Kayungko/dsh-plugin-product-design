@@ -1,5 +1,6 @@
 ---
 name: pd-audit
+user-invocable: false
 description: "Audit or critique a product flow, journey, funnel, onboarding/checkout/settings path, screen, or multi-step product experience by capturing screenshots first, then reporting UX, design, and accessibility findings inline from that evidence. Use when the user asks to audit, review, critique, inspect, assess, analyze, evaluate, or give feedback on a product experience."
 ---
 
@@ -18,7 +19,7 @@ The output is not a loose opinion. The output is:
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 
 ## User Context

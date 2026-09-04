@@ -1,6 +1,6 @@
 ---
-name: pd-index
-description: "Entry router for Product Design work in DSH. Use on explicit Product Design requests, or when the main goal is design exploration, UX research, a flow audit or critique, faithfully cloning a visual source, prototype QA, or sharing a prototype. Routes to the right pd-* skill; it does not do that skill's work. Not for ordinary implementation tasks."
+name: product-design
+description: "Single entry point for Product Design work in DSH. Use on explicit Product Design requests, or when the main goal is design exploration, visual directions, UX research, a flow audit or critique, faithfully cloning a visual source, building a prototype, prototype QA, or sharing a prototype. Load this skill first; it analyzes the request and routes to the right focused workflow."
 ---
 
 # Skill Purpose

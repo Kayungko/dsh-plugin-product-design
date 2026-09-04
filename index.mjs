@@ -1,8 +1,9 @@
 /**
  * dsh-plugin-product-design — entry point.
  *
- * A skill-only plugin: it registers no model tools, no slash commands and no
- * client modules. Its entire surface is the bundled `pd-*` skill suite,
+ * A skill-only plugin: it registers no model tools and no client modules.
+ * Its entire surface is the bundled skill suite — one user-facing entry
+ * (`product-design`) plus nine model-visible `pd-*` sub-skills —
  * mounted through an ISOLATED @deepseek-ai/dsh-skill-filesystem provider
  * (same proven pattern as dsh-plugin-task-coordinator's supervisor skill),
  * so the skills:
@@ -21,7 +22,7 @@ import { mountProductDesignSkills } from './skills.mjs';
 export const name = 'product-design';
 export const inject = [];
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 
 /**
  * @param {object} ctx cordis context

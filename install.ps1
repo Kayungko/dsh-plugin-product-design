@@ -110,4 +110,4 @@ if (Test-Path $PackageMapPath) {
 
 Write-Host ''
 Write-Host 'done. Restart DSH Desktop to load the new bundle.'
-Write-Host 'After restart, every session catalog lists the pd-* skills; /pd-index is the router entry.'
+Write-Host 'After restart, /product-design is the single user entry; it auto-routes to the hidden pd-* workflows.'

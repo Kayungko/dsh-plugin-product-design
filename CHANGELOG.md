@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1
+
+- 收敛为单一用户入口：路由技能改名 `pd-index` → `product-design`（命令
+  `/product-design`），描述改为"加载后分析需求并路由"；9 个子技能增加
+  `user-invocable: false`，退出用户命令列表但保留模型可见（AI 自动路由不变）。
+- 子技能正文中的 `$pd-index` 路由引用同步改为 `$product-design`。
+- 测试/安装态验证/README/安装提示同步更新。
+
 ## 0.1.0
 
 - 首个版本：10 个 `pd-*` skills（路由 / 简报闸门 / 用户上下文 / 研究 / 视觉方向 /

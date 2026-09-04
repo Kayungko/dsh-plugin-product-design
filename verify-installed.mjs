@@ -25,7 +25,7 @@ import { pathToFileURL } from 'node:url';
 const PLUGIN_NAME = 'dsh-plugin-product-design';
 
 const EXPECTED_SKILLS = [
-  'pd-index',
+  'product-design',
   'pd-get-context',
   'pd-user-context',
   'pd-research',

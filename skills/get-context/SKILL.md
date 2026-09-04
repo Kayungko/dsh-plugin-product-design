@@ -1,5 +1,6 @@
 ---
 name: pd-get-context
+user-invocable: false
 description: "Mandatory design-brief gate for clarifying the product and outcome. Use before ideation, image-to-code builds, redesigns, or product UI work to clarify missing product information and play back the brief before proceeding."
 ---
 
@@ -19,7 +20,7 @@ Hard boundary: do not implement UI, scaffold a prototype, start a server, or cre
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 
 ## User Context

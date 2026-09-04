@@ -20,7 +20,7 @@ const SKILLS_DIR = join(PLUGIN_ROOT, 'skills');
 const NODE = process.execPath;
 
 const EXPECTED_SKILLS = [
-  'pd-index',
+  'product-design',
   'pd-get-context',
   'pd-user-context',
   'pd-research',
@@ -63,14 +63,20 @@ test('all ten skill bundles exist with SKILL.md', () => {
   }
 });
 
-test('frontmatter: names are exactly the pd-* set, kebab-case, unique, described', () => {
+test('frontmatter: one user entry (product-design) + nine hidden pd-* sub-skills', () => {
   const names = [];
   for (const dir of SKILL_DIRS) {
     const markdown = readFileSync(join(SKILLS_DIR, dir, 'SKILL.md'), 'utf8');
     const fields = parseFrontmatter(markdown);
     assert.ok(fields.name, `${dir}: missing name`);
     assert.match(fields.name, /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/, `${dir}: name not kebab-case`);
-    assert.ok(fields.name.startsWith('pd-'), `${dir}: name must carry the pd- prefix`);
+    if (dir === 'index') {
+      assert.equal(fields.name, 'product-design', 'router must be the single user entry');
+      assert.notEqual(fields['user-invocable'], 'false', 'router must stay user-invocable');
+    } else {
+      assert.ok(fields.name.startsWith('pd-'), `${dir}: sub-skill must carry the pd- prefix`);
+      assert.equal(fields['user-invocable'], 'false', `${dir}: sub-skill must be hidden from the user command list`);
+    }
     assert.ok(fields.description && fields.description.length > 20, `${dir}: description too short`);
     assert.ok(fields.description.length <= 500, `${dir}: description exceeds catalog cap`);
     names.push(fields.name);
@@ -89,7 +95,7 @@ test('shared references resolve from every skill directory', () => {
 test('router references every focused skill by its pd-* name', () => {
   const indexBody = readFileSync(join(SKILLS_DIR, 'index', 'SKILL.md'), 'utf8');
   for (const dir of SKILL_DIRS.filter((dir) => dir !== 'index')) {
-    assert.ok(indexBody.includes(`$pd-${dir}`), `pd-index does not reference $pd-${dir}`);
+    assert.ok(indexBody.includes(`$pd-${dir}`), `product-design router does not reference $pd-${dir}`);
   }
   // the user-context skill is additionally linked by relative path
   assert.ok(indexBody.includes('../user-context/SKILL.md'));

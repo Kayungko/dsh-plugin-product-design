@@ -4,8 +4,9 @@ DeepSeek Harness（DSH Desktop）上的 **Product Design 工作流套件**：把
 经过最小设计简报、三个差异化视觉方向、证据化的审计与研究、忠实的 URL 克隆、
 响应式前端构建，一路带到 **design-qa 硬闸门** 之后的交付。
 
-插件以 **10 个 `pd-*` skills** 的形式进入每个会话的技能目录，不注册任何模型工具、
-斜杠命令或客户端模块——纯技能、可热更新、随插件卸载消失。
+对用户只有 **一个触发入口 `/product-design`**：入口技能分析需求后自动路由到
+9 个子工作流（`pd-*`，模型可见、用户命令列表隐藏）。不注册任何模型工具、
+客户端模块——纯技能、可热更新、随插件卸载消失。
 
 > 本插件是对 Codex 官方 Product Design 插件**工作流方法论的原创重写**
 > （原文内容为 OpenAI Proprietary，未复制其文案与代码），与 OpenAI 无关联。
@@ -18,8 +19,9 @@ pwsh install.ps1            # 复制进 ~/.dsh/profiles/desktop 并登记 manife
 pwsh install.ps1 -Uninstall # 移除
 ```
 
-安装后 **重启 DSH Desktop**。重启后每个会话的技能目录都会列出 `pd-*` 技能；
-`/pd-index` 是路由入口，也可以直接用自然语言触发（如"审计这个注册流程"）。
+安装后 **重启 DSH Desktop**。用户侧只有 `/product-design` 一个入口命令
+（子技能标记 `user-invocable: false`，不占用命令列表）；也可以直接用自然语言
+触发（如"审计这个注册流程"），模型会自动加载对应技能。
 
 开发自检：
 
@@ -46,7 +48,7 @@ node verify-installed.mjs   # 安装态集成验证（真实宿主 provider 发�
 
 | Skill | 角色 |
 |---|---|
-| `pd-index` | 路由器：只路由不干活；"No Visual Target, No Build" |
+| `product-design` | 唯一用户入口（`/product-design`）：分析需求并路由；只路由不干活；"No Visual Target, No Build" |
 | `pd-get-context` | 最小设计简报闸门 |
 | `pd-user-context` | 持久化产品/设计上下文（`~/.dsh/product-design/`） |
 | `pd-research` | 证据化 UX 桌面研究 |

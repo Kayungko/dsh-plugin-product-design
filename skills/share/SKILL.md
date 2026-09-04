@@ -1,5 +1,6 @@
 ---
 name: pd-share
+user-invocable: false
 description: "Share a runnable prototype using the user's preferred deployment target. Use when the user asks to share, deploy, publish, host, or make a prototype shareable; asks for the target first and never deploys before it is chosen."
 ---
 
@@ -9,7 +10,7 @@ Deploy the user's runnable prototype so they can share it with others.
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 
 ## User Context

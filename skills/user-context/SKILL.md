@@ -1,5 +1,6 @@
 ---
 name: pd-user-context
+user-invocable: false
 description: "Load or manage Product Design's saved user context. Use when the user asks to set up Product Design, get started, onboard, save product or design sources, see what Product Design remembers, update saved context, or remember Product Design preferences. Examples include product URLs, screenshots, reference images, codebase paths, Storybook, tokens, design systems, brand assets, and product/design notes."
 ---
 
@@ -19,7 +20,7 @@ Use this skill when the user asks to:
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 - Before offering onboarding or saving context for future conversations, confirm that local shell access is available and that the state directory `~/.dsh/product-design/` exists and is writable or can be created in a writable parent directory. If `user-context.md` already exists, confirm that it is writable too.
 - If any check cannot be completed or fails, persistent context is unavailable. Do not offer saved-context onboarding or claim that new context was saved for future conversations. If the user asks to save something, explain that it can be used in the current conversation but not saved for future conversations.

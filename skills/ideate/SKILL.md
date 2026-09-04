@@ -1,5 +1,6 @@
 ---
 name: pd-ideate
+user-invocable: false
 description: "Generate three distinct visual directions for a Product Design brief, as generated images when an image-generation tool is connected or as structured text directions otherwise. Use when the user asks for design variants, visual exploration, remixes, or concept directions from provided context."
 ---
 
@@ -7,11 +8,11 @@ description: "Generate three distinct visual directions for a Product Design bri
 
 You're tasked with generating design directions for a user's idea.
 
-Follow the shared Product Design routing guidance in [$pd-index](../index/SKILL.md).
+Follow the shared Product Design routing guidance in [$product-design](../index/SKILL.md).
 
 ## Critical Overrides
 
-- Refer to the plugin router [$pd-index](../index/SKILL.md) before proceeding.
+- Refer to the plugin router [$product-design](../index/SKILL.md) before proceeding.
 - Follow [$critical-overrides](../../references/critical-overrides.md).
 
 ## User Context
