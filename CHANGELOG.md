@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-09-12
+
+### Changed
+
+- **宿主要求声明规范化**（五仓统一标准，权威文档 bridge 仓 `ECOSYSTEM.md §9`）：`@deepseek-ai/dsh-skill-filesystem` peerDep 扩为 `>=0.1.2-0 <0.2.0 || >=0.1.5-rc.1 <0.1.6`——semver 预发布规则下原范围不含 0.1.5-rc.1，市场/安装校验会误报 mismatch。运行时零变化；技能挂载面经漂移预检零破坏判定（2.0.9 活体目检归用户 GUI 检查单）。
+
 ## [0.1.3] - 2026-09-04
 
 ### Added
