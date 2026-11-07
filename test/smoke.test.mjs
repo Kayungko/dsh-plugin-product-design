@@ -223,7 +223,7 @@ test('mountProductDesignSkills degrades to a warning without the provider packag
     logger: { warn: (message) => warnings.push(message) },
     plugin: () => { plugged += 1; },
   };
-  await mountProductDesignSkills(ctx);
+  await mountProductDesignSkills(ctx, async () => { throw new Error('provider unavailable'); });
   // In the dev tree the peer dependency is not installed, so the dynamic
   // import fails and the mount must degrade to exactly one warning.
   assert.equal(plugged, 0);

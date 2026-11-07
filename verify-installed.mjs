@@ -59,7 +59,7 @@ const args = parseArgs(process.argv.slice(2));
 const profile = resolve(args.profile ?? join(homedir(), '.dsh', 'profiles', 'desktop'));
 const appNodeModules = resolve(args['app-node-modules'] ?? join(
   process.env.LOCALAPPDATA ?? join(homedir(), 'AppData', 'Local'),
-  'Programs', 'DSHDesktop', 'DSH Desktop', 'resources', 'app.asar.unpacked', 'node_modules',
+  'Programs', 'DSH NEXT', 'resources', 'app.asar', 'node_modules',
 ));
 
 const results = [];

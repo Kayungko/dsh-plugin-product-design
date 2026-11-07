@@ -33,10 +33,10 @@ export function buildSkillsConfig() {
  * @param {object} ctx cordis context
  * @returns {Promise<void>}
  */
-export async function mountProductDesignSkills(ctx) {
+export async function mountProductDesignSkills(ctx, loadProvider = () => import('@deepseek-ai/dsh-skill-filesystem')) {
   let skillFilesystem;
   try {
-    skillFilesystem = await import('@deepseek-ai/dsh-skill-filesystem');
+    skillFilesystem = await loadProvider();
   } catch (error) {
     ctx.logger?.warn(`product-design: skills not mounted, dsh-skill-filesystem unavailable (${error?.message ?? error})`);
     return;
